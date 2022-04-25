@@ -22,9 +22,9 @@ namespace API.NET6.Models
         [ForeignKey("Setor")]
         [Display(Name = "Código Setor")]
         public int IdSetor { get; set; }
-        public virtual Setor Setor { get; set; }
+        //public virtual Setor Setor { get; set; }
 
-        [JsonIgnore]
-        public virtual ICollection<Colaborador> Colaboradores { get; set; }
+        //[JsonIgnore]
+        //public virtual ICollection<Colaborador> Colaboradores { get; set; }
     }
 }

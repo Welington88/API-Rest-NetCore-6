@@ -3,6 +3,7 @@ using System;
 using API.NET6.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.NET6.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220424212321_usuario")]
+    partial class usuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +37,7 @@ namespace API.NET6.Migrations
 
                     b.HasKey("IdCargo");
 
-                    b.ToTable("Cargo", (string)null);
+                    b.ToTable("Cargo");
                 });
 
             modelBuilder.Entity("API.NET6.Models.Colaborador", b =>
@@ -76,7 +78,7 @@ namespace API.NET6.Migrations
 
                     b.HasKey("Matricula");
 
-                    b.ToTable("Colaborador", (string)null);
+                    b.ToTable("Colaborador");
                 });
 
             modelBuilder.Entity("API.NET6.Models.Setor", b =>
@@ -92,7 +94,7 @@ namespace API.NET6.Migrations
 
                     b.HasKey("IdSetor");
 
-                    b.ToTable("Setor", (string)null);
+                    b.ToTable("Setor");
                 });
 
             modelBuilder.Entity("API.NET6.Models.Usuario", b =>
@@ -113,7 +115,7 @@ namespace API.NET6.Migrations
 
                     b.HasKey("IdUsuario");
 
-                    b.ToTable("Usuario", (string)null);
+                    b.ToTable("Usuario");
                 });
 #pragma warning restore 612, 618
         }

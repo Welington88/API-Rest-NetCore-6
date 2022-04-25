@@ -14,5 +14,8 @@ namespace API.NET6.Context
         public DbSet<Setor> Setor { get; set; }
 
         public DbSet<Colaborador> Colaborador { get; set; }
+
+        public DbSet<Usuario> Usuario { get; set; }
+
     }
 }

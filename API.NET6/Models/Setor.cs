@@ -20,10 +20,10 @@ namespace API.NET6.Models
         [StringLength(50, ErrorMessage = " O Campo {0} pode ter no máximo {1} e minimo {2} caracteres ", MinimumLength = 2)]
         public String Descricao { get; set; }
 
-        [JsonIgnore]
-        public virtual ICollection<Cargo> Cargos { get; set; }
+        //[JsonIgnore]
+        //public virtual ICollection<Cargo> Cargos { get; set; }
 
-        [JsonIgnore]
-        public virtual ICollection<Colaborador> Colaboradores { get; set; }
+        //[JsonIgnore]
+        //public virtual ICollection<Colaborador> Colaboradores { get; set; }
     }
 }

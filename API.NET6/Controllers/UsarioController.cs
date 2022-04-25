@@ -1,7 +1,9 @@
 #nullable disable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.NET6.Context;
@@ -13,47 +15,47 @@ namespace API.NET6.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class SetorController : ControllerBase
+    public class UsarioController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public SetorController(DataContext context)
+        public UsarioController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Setor
+        // GET: api/Usario
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Setor>>> GetSetor()
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuario()
         {
-            return await _context.Setor.ToListAsync();
+            return await _context.Usuario.ToListAsync();
         }
 
-        // GET: api/Setor/5
+        // GET: api/Usario/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Setor>> GetSetor(int id)
+        public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
-            var setor = await _context.Setor.FindAsync(id);
+            var usuario = await _context.Usuario.FindAsync(id);
 
-            if (setor == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return setor;
+            return usuario;
         }
 
-        // PUT: api/Setor/5
+        // PUT: api/Usario/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSetor(int id, Setor setor)
+        public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
         {
-            if (id != setor.IdSetor)
+            if (id != usuario.IdUsuario)
             {
                 return BadRequest();
             }
 
-            _context.Entry(setor).State = EntityState.Modified;
+            _context.Entry(usuario).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +63,7 @@ namespace API.NET6.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SetorExists(id))
+                if (!UsuarioExists(id))
                 {
                     return NotFound();
                 }
@@ -74,36 +76,36 @@ namespace API.NET6.Controllers
             return NoContent();
         }
 
-        // POST: api/Setor
+        // POST: api/Usario
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Setor>> PostSetor(Setor setor)
+        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
-            _context.Setor.Add(setor);
+            _context.Usuario.Add(usuario);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSetor", new { id = setor.IdSetor }, setor);
+            return CreatedAtAction("GetUsuario", new { id = usuario.IdUsuario }, usuario);
         }
 
-        // DELETE: api/Setor/5
+        // DELETE: api/Usario/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSetor(int id)
+        public async Task<IActionResult> DeleteUsuario(int id)
         {
-            var setor = await _context.Setor.FindAsync(id);
-            if (setor == null)
+            var usuario = await _context.Usuario.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            _context.Setor.Remove(setor);
+            _context.Usuario.Remove(usuario);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool SetorExists(int id)
+        private bool UsuarioExists(int id)
         {
-            return _context.Setor.Any(e => e.IdSetor == id);
+            return _context.Usuario.Any(e => e.IdUsuario == id);
         }
     }
 }

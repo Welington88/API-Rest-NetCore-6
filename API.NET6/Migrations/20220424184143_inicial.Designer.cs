@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.NET6.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220423235609_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220424184143_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,8 +36,6 @@ namespace API.NET6.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("IdCargo");
-
-                    b.HasIndex("IdSetor");
 
                     b.ToTable("Cargo");
                 });
@@ -80,10 +78,6 @@ namespace API.NET6.Migrations
 
                     b.HasKey("Matricula");
 
-                    b.HasIndex("IdCargo");
-
-                    b.HasIndex("IdSetor");
-
                     b.ToTable("Colaborador");
                 });
 
@@ -101,48 +95,6 @@ namespace API.NET6.Migrations
                     b.HasKey("IdSetor");
 
                     b.ToTable("Setor");
-                });
-
-            modelBuilder.Entity("API.NET6.Models.Cargo", b =>
-                {
-                    b.HasOne("API.NET6.Models.Setor", "Setor")
-                        .WithMany("Cargos")
-                        .HasForeignKey("IdSetor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Setor");
-                });
-
-            modelBuilder.Entity("API.NET6.Models.Colaborador", b =>
-                {
-                    b.HasOne("API.NET6.Models.Cargo", "Cargo")
-                        .WithMany("Colaboradores")
-                        .HasForeignKey("IdCargo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.NET6.Models.Setor", "Setor")
-                        .WithMany("Colaboradores")
-                        .HasForeignKey("IdSetor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cargo");
-
-                    b.Navigation("Setor");
-                });
-
-            modelBuilder.Entity("API.NET6.Models.Cargo", b =>
-                {
-                    b.Navigation("Colaboradores");
-                });
-
-            modelBuilder.Entity("API.NET6.Models.Setor", b =>
-                {
-                    b.Navigation("Cargos");
-
-                    b.Navigation("Colaboradores");
                 });
 #pragma warning restore 612, 618
         }

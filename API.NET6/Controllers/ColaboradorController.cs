@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.NET6.Context;
 using API.NET6.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.NET6.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ColaboradorController : ControllerBase
     {
         private readonly DataContext _context;
