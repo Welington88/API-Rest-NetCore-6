@@ -47,15 +47,15 @@ namespace API.NET6.Models
         [ForeignKey("Setor")]
         [Display(Name = "Código Setor")]
         public int IdSetor { get; set; }
-        //[JsonIgnore]
-        //public virtual Setor Setor { get; set; }
+        [JsonIgnore]
+        public virtual Setor Setor { get; set; }
 
         [ForeignKey("Cargo")]
         [Display(Name = "Código Cargo")]
-        //[JsonIgnore]
+        [JsonIgnore]
         public int IdCargo { get; set; }
-        //[JsonIgnore]
-        //public virtual Cargo Cargo { get; set; }
+        [JsonIgnore]
+        public virtual Cargo Cargo { get; set; }
 
     }
 

@@ -15,7 +15,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace API.NET6.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0", Deprecated = true)]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [AllowAnonymous]
     public class TokenController : ControllerBase

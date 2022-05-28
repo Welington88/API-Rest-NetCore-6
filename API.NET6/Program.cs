@@ -2,6 +2,8 @@ using System.Text;
 using API.NET6.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,8 +50,20 @@ builder.Services.AddAuthentication(options => {
                 )
         };
     });
-
 builder.Services.AddControllers();
+
+builder.Services.AddApiVersioning(o =>
+{
+    o.UseApiBehavior = false;
+    o.ReportApiVersions = true;
+    o.AssumeDefaultVersionWhenUnspecified = true;
+    o.DefaultApiVersion = new ApiVersion(1, 0);
+
+    o.ApiVersionReader = ApiVersionReader.Combine(
+        new HeaderApiVersionReader("x-api-version"),
+        new QueryStringApiVersionReader(),
+        new UrlSegmentApiVersionReader());
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
