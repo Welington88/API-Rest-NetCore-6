@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0jk79vNSm4NybZaic489wY7oHxXoMHigghytn6fkuGRmsVRx10Iww1JEs1GhQef3FAfHgSnfGAhHBA3f4+nvrA==",
+  "dgSpecHash": "74kgYeEfpxSSw51fA2xMfZsyDs69OETYQngfCR5IgUNo2n4uDc/rWgoN7KxB6BY3Jb3XEGYXGDa956o5FHgAvg==",
   "success": true,
   "projectFilePath": "/Users/welingtonmarquezini/Projects/API.NET6/API.NET6/API.NET6.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "/Users/welingtonmarquezini/.nuget/packages/messagepack.annotations/2.1.152/messagepack.annotations.2.1.152.nupkg.sha512",
     "/Users/welingtonmarquezini/.nuget/packages/messagepackanalyzer/2.1.152/messagepackanalyzer.2.1.152.nupkg.sha512",
     "/Users/welingtonmarquezini/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/6.0.4/microsoft.aspnetcore.authentication.jwtbearer.6.0.4.nupkg.sha512",
+    "/Users/welingtonmarquezini/.nuget/packages/microsoft.aspnetcore.mvc.versioning/5.0.0/microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
     "/Users/welingtonmarquezini/.nuget/packages/microsoft.aspnetcore.razor.language/6.0.0/microsoft.aspnetcore.razor.language.6.0.0.nupkg.sha512",
     "/Users/welingtonmarquezini/.nuget/packages/microsoft.bcl.asyncinterfaces/5.0.0/microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
     "/Users/welingtonmarquezini/.nuget/packages/microsoft.build/17.0.0/microsoft.build.17.0.0.nupkg.sha512",
