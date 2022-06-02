@@ -36,10 +36,12 @@
     <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
     <None Remove="Dapper" />
     <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="DB\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Context\" />
     <Folder Include="Controllers\" />
+    <Folder Include="DB\" />
   </ItemGroup>
 </Project>
