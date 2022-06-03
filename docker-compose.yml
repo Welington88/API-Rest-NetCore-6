@@ -1,8 +1,39 @@
-version: '3.4'
-
+version: '3.9'
+volumes:
+  data:
 services:
+  db:
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - data:/var/lib/mysql
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=app_development
+    networks:
+      - compose-bridge
   api.net6:
     image: ${DOCKER_REGISTRY-}api
+    container_name: api
     build:
       context: .
       dockerfile: API.NET6/Dockerfile
+    networks:
+      - compose-bridge
+    depends_on:
+      - db
+  app:
+    image: phpmyadmin:latest
+    links:
+      - db
+    ports:
+      - 80:80
+    networks:
+        - compose-bridge
+    environment:
+      - PMA_ARBITRARY=1
+networks:
+  compose-bridge:
+    driver: bridge
