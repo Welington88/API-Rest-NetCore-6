@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  api.net6:
+    image: ${DOCKER_REGISTRY-}api
+    build:
+      context: .
+      dockerfile: API.NET6/Dockerfile
