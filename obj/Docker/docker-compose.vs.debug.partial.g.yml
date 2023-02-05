@@ -1,9 +1,8 @@
-version: '3.4'
+version: '3.9'
 
 services:
   api.net6:
     image: api:dev
-    container_name: API.NET6
     build:
       target: base
       labels:
@@ -12,17 +11,17 @@ services:
     environment:
       - DOTNET_USE_POLLING_FILE_WATCHER=1
       - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
-      - NUGET_FALLBACK_PACKAGES=
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_api.net6$
     volumes:
       - /Users/welingtonmarquezini/Projects/API.NET6/API.NET6:/app
       - /Users/welingtonmarquezini/Projects/API.NET6:/src
       - /Users/welingtonmarquezini/vsdbg/vs2017u5:/remote_debugger:rw
-      - /Users/welingtonmarquezini/.nuget/packages/:/root/.nuget/packages:ro
+#$nuget_volume_mapping_api.net6$
 
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages  \"/app/bin/Debug/net6.0/API.NET6.dll\""
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_api.net6$ \"/app/bin/Debug/net6.0/API.NET6.dll\""
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
     tty: true
