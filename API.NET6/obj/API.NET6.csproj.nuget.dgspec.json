@@ -20,6 +20,7 @@
           "net6.0"
         ],
         "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +45,7 @@
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.12, )"
             },
             "Microsoft.AspNetCore.Mvc.Versioning": {
               "target": "Package",
@@ -52,37 +53,37 @@
             },
             "Microsoft.EntityFrameworkCore.Proxies": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.12, )"
             },
             "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.12, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.12, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.12, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.12, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.3, )"
+              "version": "[6.0.11, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[6.0.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.3.1, )"
+              "version": "[6.4.0, )"
             }
           },
           "imports": [
@@ -91,7 +92,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -103,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
         }
       }
     }

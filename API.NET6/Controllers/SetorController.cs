@@ -13,7 +13,7 @@ namespace API.NET6.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class SetorController : ControllerBase
     {
         private readonly DataContext _context;
