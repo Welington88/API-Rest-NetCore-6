@@ -23,4 +23,9 @@ public class Usuario
     [Required]
     public String Senha { get; set; }
 
+    [Required]
+    [StringLength(50, MinimumLength = 3)]
+    public String Role { get; set; }
+
+
 }

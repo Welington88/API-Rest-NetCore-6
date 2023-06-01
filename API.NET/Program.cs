@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+
 #nullable disable
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,8 +44,8 @@ builder.Services.AddAuthentication(options => {
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "API6",
-            ValidAudience = "API6",
+            ValidIssuer = "API",
+            ValidAudience = "API",
             IssuerSigningKey = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(builder.Configuration["SecurityKey"])
                 )
@@ -57,7 +58,7 @@ builder.Services.AddApiVersioning(o =>
     o.UseApiBehavior = false;
     o.ReportApiVersions = true;
     o.AssumeDefaultVersionWhenUnspecified = true;
-    o.DefaultApiVersion = new ApiVersion(1, 0);
+    o.DefaultApiVersion = ApiVersion.Default;
 
     o.ApiVersionReader = ApiVersionReader.Combine(
         new HeaderApiVersionReader("x-api-version"),
@@ -69,6 +70,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "API.NET Core 6", Version = "v1", Description = "API.NET core 6" });
+            c.SwaggerDoc("v2", new OpenApiInfo { Title = "API.NET Core 6", Version = "v2", Description = "API.NET core 6" });
+
             //Authoraze na api
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
             {
