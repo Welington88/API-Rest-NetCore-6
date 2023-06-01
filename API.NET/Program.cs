@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 #nullable disable
 var builder = WebApplication.CreateBuilder(args);
@@ -58,7 +59,7 @@ builder.Services.AddApiVersioning(o =>
     o.UseApiBehavior = false;
     o.ReportApiVersions = true;
     o.AssumeDefaultVersionWhenUnspecified = true;
-    o.DefaultApiVersion = ApiVersion.Default;
+    o.DefaultApiVersion = new ApiVersion(2, 0);
 
     o.ApiVersionReader = ApiVersionReader.Combine(
         new HeaderApiVersionReader("x-api-version"),
@@ -69,8 +70,8 @@ builder.Services.AddApiVersioning(o =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "API.NET Core 6", Version = "v1", Description = "API.NET core 6" });
-            c.SwaggerDoc("v2", new OpenApiInfo { Title = "API.NET Core 6", Version = "v2", Description = "API.NET core 6" });
+            c.SwaggerDoc($"v1", new OpenApiInfo { Title = "API.NET Core", Version = $"v1", Description = $"API.NET core v1" });
+            c.SwaggerDoc($"v2", new OpenApiInfo { Title = "API.NET Core", Version = $"v1", Description = $"API.NET core v2" });
 
             //Authoraze na api
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
@@ -105,7 +106,16 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API.NET6 Core v1"));
+    app.UseSwaggerUI(c => {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", $"API.NET Core v1");
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", $"API.NET Core v2");
+
+        c.DocExpansion(DocExpansion.List);
+        c.DefaultModelsExpandDepth(-1);
+        c.OAuthClientId("swagger-ui");
+        c.OAuthAppName("Swagger UI");
+    });
+
 }
 
 app.UseRouting();
@@ -119,6 +129,13 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
+
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "api/{controller}/{action}/{id?}");
+    endpoints.MapControllerRoute(
+        name: "v2",
+        pattern: "api/v2/{controller}/{action}/{id?}");
 });
 
 app.Run();
