@@ -77,7 +77,7 @@ public class TokenController : ControllerBase
         }
         catch (Exception e)
         {
-            Console.WriteLine("Erro Buscar Usuraios" + e.InnerException);
+            Console.WriteLine("Erro Buscar Usuarios" + e.InnerException);
         }
 
         return usuarios;
@@ -88,7 +88,6 @@ public class TokenController : ControllerBase
     // POST: api/Token
     [AllowAnonymous]
     [HttpPost]
-    [ApiVersion("2.0")]
     public IActionResult RequestTokenAsync([FromBody] Usuario request)
     {
         try
@@ -136,6 +135,5 @@ public class TokenController : ControllerBase
 
             return Unauthorized("Credenciais Inválidas....");
         }
-
     }
 }

@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace API.NET.Controllers.V1;
 
 [ApiVersion("1.0", Deprecated = true)]
+[Produces("application/json")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
 [AllowAnonymous]
@@ -78,7 +79,7 @@ public class TokenController : ControllerBase
         }
         catch (Exception e)
         {
-            Console.WriteLine("Erro Buscar Usuraios" + e.InnerException);
+            Console.WriteLine("Erro Buscar Usuarios" + e.InnerException);
         }
 
         return usuarios;
@@ -88,6 +89,7 @@ public class TokenController : ControllerBase
 
     // POST: api/Token
     [AllowAnonymous]
+    [ProducesResponseType(200)]
     [HttpPost]
     public IActionResult RequestToken([FromBody] Usuario request)
     {
@@ -114,8 +116,8 @@ public class TokenController : ControllerBase
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var token = new JwtSecurityToken(
-                        issuer: "API6",
-                        audience: "API6",
+                        issuer: "API",
+                        audience: "API",
                         claims: claims.Claims,
                         expires: DateTime.Now.AddMinutes(5),
                         signingCredentials: creds

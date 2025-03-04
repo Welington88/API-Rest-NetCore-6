@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text;
 using API.NET.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 #nullable disable
@@ -70,9 +72,12 @@ builder.Services.AddApiVersioning(o =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc($"v1", new OpenApiInfo { Title = "API.NET Core", Version = $"v1", Description = $"API.NET core v1" });
-            c.SwaggerDoc($"v2", new OpenApiInfo { Title = "API.NET Core", Version = $"v1", Description = $"API.NET core v2" });
+            //c.OperationFilter<RemoveVersionFromParameter>();
 
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "API.NET Core", Version = "v1", Description = "API.NET core v1" });
+            c.SwaggerDoc("v2", new OpenApiInfo { Title = "API.NET Core", Version = "v2", Description = "API.NET core v2" });
+
+            
             //Authoraze na api
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
             {
@@ -107,9 +112,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c => {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", $"API.NET Core v1");
-        c.SwaggerEndpoint("/swagger/v2/swagger.json", $"API.NET Core v2");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API.NET Core v1");
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "API.NET Core v2");
 
+        c.RoutePrefix = string.Empty;
         c.DocExpansion(DocExpansion.List);
         c.DefaultModelsExpandDepth(-1);
         c.OAuthClientId("swagger-ui");
@@ -130,12 +136,25 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "api/{controller}/{action}/{id?}");
-    endpoints.MapControllerRoute(
-        name: "v2",
-        pattern: "api/v2/{controller}/{action}/{id?}");
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllerRoute(
+            name: "versioned",
+            pattern: "api/v{version:apiVersion}/{controller}/{action}/{id?}");
+    });
 });
 
 app.Run();
+
+
+public class RemoveVersionFromParameter : IOperationFilter
+{
+    public void Apply(OpenApiOperation operation, OperationFilterContext context)
+    {
+        var versionParameter = operation.Parameters.SingleOrDefault(p => p.Name == "version");
+        if (versionParameter != null)
+        {
+            operation.Parameters.Remove(versionParameter);
+        }
+    }
+}
